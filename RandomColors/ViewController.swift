@@ -20,7 +20,7 @@ class ViewController: UIViewController {
    
     func addRandomColours(){
         
-        for _ in 0..<50{
+        for _ in 0..<60{
             colours.append(chooseRandomColour())
         }
     }
