@@ -33,6 +33,21 @@ class ViewController: UIViewController {
         return randomColour
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        /*
+         What this means is wherever my segue is pointing to thats what destVC is
+         And we want access to that destination so that we can set the colour
+         here we are casting this regular view controller so that colours detailvc can use
+         this as a variable which normal vc cant
+         */
+        let destVC = segue.destination as! ColoursDetailViewController
+        
+        /*
+         What this means is we are setting that colour as a sender's colour that we just passed in */
+        destVC.color = sender as? UIColor
+    }
+    
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource
@@ -65,6 +80,18 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "ToColoursDetailVC", sender: nil)
+        
+        /*
+         Here we will create another variable colour and assign it with the value of which
+         ever row is tapped
+         */
+        let colour = colours[indexPath.row]
+        
+        /*
+         Here the sender for segue will be colours as we want to pass on the value of colour to
+         next view controller so that it can render that colour
+         */
+        //here we are calling the function written above
+        performSegue(withIdentifier: "ToColoursDetailVC", sender: colour)
     }
 }
